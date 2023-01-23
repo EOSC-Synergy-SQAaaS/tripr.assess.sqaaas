@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/BiodataAnalysisGroup/tripr:
+      branch: master
+      repo: https://github.com/BiodataAnalysisGroup/tripr
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/BiodataAnalysisGroup/tripr git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-viridian-mandrill.sh
+        container: qc.acc_tacky-corn-okapi
+  QC.Doc:
+    repos:
+      github.com/BiodataAnalysisGroup/tripr find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-black-flamingo.sh
+        container: qc.doc_slaphappy-teal-hamster
+      github.com/BiodataAnalysisGroup/tripr git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-magenta-caracal.sh
+        container: qc.doc_scummy-cornflower-lionfish
+      github.com/BiodataAnalysisGroup/tripr markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-peach-bracke.sh
+        container: qc.doc_woolly-saffron-echidna
+  QC.Lic:
+    repos:
+      github.com/BiodataAnalysisGroup/tripr licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-rose-seal.sh
+        container: qc.lic_foggy-brass-falcon
+  QC.Met:
+    repos:
+      github.com/BiodataAnalysisGroup/tripr cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-heliotrope-jaguar.sh
+        container: qc.met_muzzy-corn-burmese
+  QC.Ver:
+    repos:
+      github.com/BiodataAnalysisGroup/tripr get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-celadon-owl.sh
+        container: qc.ver_dorky-grey-goose
+timeout: 5400
